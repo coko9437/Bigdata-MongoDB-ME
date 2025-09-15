@@ -272,7 +272,8 @@ mongod --shardsvr --replSet shard0 --port 27021 ...
 
 - `--shardsvr`: 이 `mongod` 인스턴스의 역할을 **'샤드 서버'**로 지정하는 옵션입니다. 이 서버가 데이터의 일부를 저장할 '분관'임을 알려줍니다.
 
-````javascript
+```
+javascript
 // 3. 샤드 중 하나에 접속하여 Replica Set 초기화
 mongosh --port 27021
 
@@ -284,9 +285,10 @@ rs.initiate({
     {_id:1, host:"localhost:27022"},
     {_id:2, host:"localhost:27023", arbiterOnly: true} // Arbiter 멤버
   ]
-})```
+})
+```
 
-*   `arbiterOnly: true`: 이 멤버는 **'Arbiter(중재자)'** 역할을 합니다. Arbiter는 데이터를 저장하지 않으면서 Replica Set의 선거(Election)에 투표권만 행사하는 특별한 멤버입니다. Primary와 Secondary가 1:1로 남아 의견이 갈릴 때(Split Brain), Arbiter가 캐스팅보트 역할을 하여 과반수(Quorum)를 형성하고 새로운 Primary를 선출할 수 있도록 돕습니다. 실제 데이터를 저장하지 않으므로 적은 리소스로 홀수 개의 투표권을 확보할 때 유용합니다.
+- `arbiterOnly: true`: 이 멤버는 **'Arbiter(중재자)'** 역할을 합니다. Arbiter는 데이터를 저장하지 않으면서 Replica Set의 선거(Election)에 투표권만 행사하는 특별한 멤버입니다. Primary와 Secondary가 1:1로 남아 의견이 갈릴 때(Split Brain), Arbiter가 캐스팅보트 역할을 하여 과반수(Quorum)를 형성하고 새로운 Primary를 선출할 수 있도록 돕습니다. 실제 데이터를 저장하지 않으므로 적은 리소스로 홀수 개의 투표권을 확보할 때 유용합니다.
 
 #### **2. 해당 설명**
 
@@ -300,7 +302,7 @@ rs.initiate({
 
 #### **1. 코드, 문법 및 개별 설명**
 
-```bash
+````bash
 # Mongos 실행
 mongos --configdb config0/localhost:27018 --port 20000```
 
